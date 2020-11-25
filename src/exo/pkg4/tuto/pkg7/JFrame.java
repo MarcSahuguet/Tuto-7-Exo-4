@@ -24,6 +24,7 @@ public class JFrame extends javax.swing.JFrame {
     public JFrame() {
         initComponents();
         //drawRectangle(x,y,size,color);
+        ///Srhr
     }
 
     /**
