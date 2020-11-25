@@ -24,7 +24,10 @@ public class JFrame extends javax.swing.JFrame {
      */
     public JFrame() {
         initComponents();
-       
+       //Qeteryjtk
+        if( jCheckBoxMenuItem1.isSelected()) drawCircle(x,y,size,color);
+        if( jCheckBoxMenuItem2.isSelected()) drawRectangle(x,y,size,color);
+        if( jCheckBoxMenuItem3.isSelected()) drawTriangle(x,y,size,color);
     }
 
     /**
