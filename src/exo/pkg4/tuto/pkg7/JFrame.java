@@ -17,14 +17,14 @@ public class JFrame extends javax.swing.JFrame {
     private int x= 214;
     private int y= 211;
     private int size= 104;
+    private boolean line = false;
     private Color color = new Color(0,0,0);
     /**
      * Creates new form JFrame
      */
     public JFrame() {
         initComponents();
-        //drawRectangle(x,y,size,color);
-        ///Srhr
+       
     }
 
     /**
@@ -46,6 +46,7 @@ public class JFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
@@ -96,6 +97,13 @@ public class JFrame extends javax.swing.JFrame {
         jLabel2.setText("y-coord");
 
         jLabel3.setText("width");
+
+        jCheckBox1.setText("Lines Only");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Shape");
         buttonGroup1.add(jMenu1);
@@ -180,13 +188,15 @@ public class JFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(51, Short.MAX_VALUE)
+                        .addContainerGap(46, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(80, 80, 80))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jCheckBox1)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(57, 57, 57))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -209,7 +219,9 @@ public class JFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(59, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jCheckBox1)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -285,6 +297,13 @@ public class JFrame extends javax.swing.JFrame {
         drawRectangle(x,y,size,color);
     }//GEN-LAST:event_jCheckBoxMenuItem2ActionPerformed
 
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        line = jCheckBox1.isSelected();
+        if( jCheckBoxMenuItem1.isSelected()) drawCircle(x,y,size,color);
+        if( jCheckBoxMenuItem2.isSelected()) drawRectangle(x,y,size,color);
+        if( jCheckBoxMenuItem3.isSelected()) drawTriangle(x,y,size,color);
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -324,16 +343,16 @@ public class JFrame extends javax.swing.JFrame {
         Graphics2D g2d = (Graphics2D)jPanel1.getGraphics();
         g2d.clearRect(2, 2, 410, 410);
         g2d.setColor(col);
-        g2d.fillOval(x-(size/2), y-(size/2), size, size);
-        //g2d.setBackground(Color.yellow);
+        if(line) g2d.drawOval(x-(size/2), y-(size/2), size, size);
+        else if(!line) g2d.fillOval(x-(size/2), y-(size/2), size, size);
     }
     public final void drawRectangle(int x, int y, int size, Color col)
     {
         Graphics2D g2d = (Graphics2D)jPanel1.getGraphics();
         g2d.clearRect(2, 2, 410, 410);
         g2d.setColor(col);
-        g2d.drawRect(x-(size/2), y-(size/2), size, size);
-        
+        if(line) g2d.drawRect(x-(size/2), y-(size/2), size, size);
+        else if(!line) g2d.fillRect(x-(size/2), y-(size/2), size, size);
     }
     public void drawTriangle(int x, int y, int size, Color col)
     {
@@ -342,14 +361,15 @@ public class JFrame extends javax.swing.JFrame {
         Graphics2D g2d = (Graphics2D)jPanel1.getGraphics();
         g2d.clearRect(2, 2, 410, 410);
         g2d.setColor(col);
-        g2d.drawPolygon(xpos, ypos, 3);  
-        
+        if(line) g2d.drawPolygon(xpos, ypos, 3);  
+        else if(!line) g2d.fillPolygon(xpos, ypos, 3); 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
